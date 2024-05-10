@@ -10,6 +10,7 @@ export default function GlobalState({children}){
     const [loading, setLoading] = useState(false);
     const [recipeList, setRecipeList] = useState([]);
     const [recipeDetails, setRecipeDetails] = useState(null);
+    const [favoritesList, setFavoritesList] = useState([]);
 
     async function handleSubmit(e){
 
@@ -33,7 +34,7 @@ export default function GlobalState({children}){
                 setSearchParam('');
             }
 
-            navigate('/');
+           navigate('/');
             
         } catch (error) {
             console.log(error);
@@ -44,7 +45,38 @@ export default function GlobalState({children}){
 
     const navigate = useNavigate();
 
-    return <Globalcontext.Provider value={ {searchParam, setSearchParam, handleSubmit, recipeList, loading, setLoading, recipeDetails, setRecipeDetails} }>
+    function handleAddFavorite(currentItem){
+        
+        // we copy the favorite list
+        let copyFavList = [...favoritesList];
+        
+        // we check the index in the array
+        const index = copyFavList.findIndex(item => item.id === currentItem.id);
+
+        // if the index does not exist in the array:
+        if(index === -1){
+            copyFavList.push(currentItem); // <--we add it to the array
+        }
+        // else if it already exist:
+        else {
+            copyFavList.splice(index); // <--we remove it form the array
+        }
+
+        setFavoritesList(copyFavList);
+    }
+
+    return <Globalcontext.Provider value={
+        {
+        searchParam,
+        setSearchParam,
+        handleSubmit,
+        recipeList,
+        loading,
+        recipeDetails,
+        setRecipeDetails,
+        handleAddFavorite,
+        favoritesList
+        } }>
         { children }
     </Globalcontext.Provider>
 }

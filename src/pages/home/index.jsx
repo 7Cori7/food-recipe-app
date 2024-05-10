@@ -17,7 +17,7 @@ export default function Home(){
                 recipeList && recipeList.length > 0 && !loading
                 ? recipeList.map((item, index) => <RecipeItem key={index} item={item} />)
                 : <div>
-                    <p>Nothing to show yet. Please search for a recipe</p>
+                    <p className="text-center">Nothing to show yet. Please search for a recipe</p>
                 </div>
             }
         </div>

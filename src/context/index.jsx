@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 
 export const Globalcontext = createContext(null);
 
-
 export default function GlobalState({children}){
 
     const [searchParam, setSearchParam] = useState('');
@@ -77,6 +76,8 @@ export default function GlobalState({children}){
         handleAddFavorite,
         favoritesList
         } }>
+
         { children }
+        
     </Globalcontext.Provider>
 }

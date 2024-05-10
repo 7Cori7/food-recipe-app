@@ -9,9 +9,11 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <BrowserRouter>
 
         <GlobalState>
+
             <React.StrictMode>
                 <App />
             </React.StrictMode>
+            
         </GlobalState>
         
     </BrowserRouter>
